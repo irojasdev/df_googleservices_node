@@ -1,0 +1,27 @@
+{
+  "name": "googleservices",
+  "version": "1.0.0",
+  "description": "REST app to provide data to googleservices agent of DialogFlow",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/irojasdev/df_googleservices_node.git"
+  },
+  "keywords": [
+    "dialogflow",
+    "rest",
+    "fulfillment"
+  ],
+  "author": "irojas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/irojasdev/df_googleservices_node/issues"
+  },
+  "homepage": "https://github.com/irojasdev/df_googleservices_node#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
