@@ -12,8 +12,9 @@ const options = {
   passphrase: "Zizu2015"
 }
 
-app.get("/googleservices", function (req, res) {
+app.all("/googleservices", function (req, res, next) {
   res.send("This is a response from node app instanced in Amazon's ec2 instance");
+  next();
 });
 
 app.listen(PORT, () => {
