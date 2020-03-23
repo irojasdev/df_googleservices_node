@@ -7,8 +7,9 @@ const PORT = 5000,
 	HTTPS_PORT = 5050;
 
 const options = {
-  key: fs.readFileSync("/etc/letsencrypt/live/irojas91dev.ddns.net/privkey.pem"),
-  cert: fs.readFileSync("/etc/letsencrypt/live/irojas91dev.ddns.net/fullchain.pem")
+  key: fs.readFileSync("/home/ec2-user/sshCertificates/privkey.pem"),
+  cert: fs.readFileSync("/home/ec2-user/sshCertificates/fullchain.pem"),
+  passphrase: "Zizu2015"
 }
 
 app.get("/googleservices", function (req, res) {
