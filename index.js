@@ -1,16 +1,10 @@
 const express = require("express"),
 	fs = require("fs"),
 	https = require("https");
+	//middlewares = require("./middleware/loader");
 
 const app = express();
-const PORT = 5000,
-	HTTPS_PORT = 5050;
-
-const options = {
-  key: fs.readFileSync("/home/ec2-user/sshCertificates/privkey.pem"),
-  cert: fs.readFileSync("/home/ec2-user/sshCertificates/fullchain.pem"),
-  passphrase: "Zizu2015"
-}
+const config = fs.readFileSync("./app_config.json");
 
 app.post("/googleservices", function (req, res) {
 	var response = {
@@ -20,8 +14,4 @@ app.post("/googleservices", function (req, res) {
 	res.send(response);
 });
 
-app.listen(PORT, () => {
- console.log("Server started at port " + PORT);
-});
-
-https.createServer(options, app).listen(HTTPS_PORT);
+https.createServer(config.ssh_options, app).listen(config.https_port);
