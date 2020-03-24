@@ -4,7 +4,7 @@ const express = require("express"),
 	//middlewares = require("./middleware/loader");
 
 const app = express();
-const config = fs.readFileSync("./app_config.json");
+const config = JSON.parse(fs.readFileSync("./app_config.json", "utf8"));
 
 const ssh_options = new Object();
 ssh_options.key = fs.readFileSync(config.ssh.key_file);

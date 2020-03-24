@@ -1,9 +1,9 @@
 {
-	https_port: 5050,
+	"https_port": 5050,
 
-	ssh: {
-	  key_file: "/home/ec2-user/sshCertificates/privkey.pem",
-	  cert_file: "/home/ec2-user/sshCertificates/fullchain.pem",
-	  passphrase: "Zizu2015"
+	"ssh": {
+	  "key_file": "/home/ec2-user/sshCertificates/privkey.pem",
+	  "cert_file": "/home/ec2-user/sshCertificates/fullchain.pem",
+	  "passphrase": "Zizu2015"
 	}
 }
