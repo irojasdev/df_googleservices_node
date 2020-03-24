@@ -7,30 +7,34 @@ function Middleware(data){
 	var self = this;
 
 	var outContextCallableMiddleware = function(req, res, next){
-		self.process(req, res, next);
+		self.process(req.body, res, next);
 	};
 
 	return outContextCallableMiddleware;
 }
 
-Middleware.prototype.INTENT_ID = "bbfbdd03-3708-46bd-baef-44eb9214f4a0";
+Middleware.prototype.INTENT_NAME = "projects/services-fcf2b/agent/intents/bbfbdd03-3708-46bd-baef-44eb9214f4a0";
 
 Middleware.prototype.process = function(req, res, next){
 
+	var self = this;
+
 	if(this.isValidRequest(req)){
-		console.log("Currency Conversion processing");
 
 		this.httpresponse = res;
 		this.httprequest = req;
 
-		var client = new require('node-rest-client').Client();
+		var Client = require('node-rest-client').Client;
+		var client = new Client();
 		var URL = "https://free.currconv.com/api/v7/convert?q=${from}_${to}&compact=ultra&apiKey=${apikey}";
 
 		var args = {
-		    data: { from: req.parameters.from, to: req.parameters.to, apikey: this.apikey }
+		    path: { "from": req.queryResult.parameters.from, "to": req.queryResult.parameters.to, "apikey": this.apikey }
 		};
 
-		client.get(URL, args, this.convertAmount)
+		client.get(URL, args, function(data){
+				self.convertAmount(data)
+			})
 			.on("error", this.error);
 
 		return;
@@ -40,12 +44,20 @@ Middleware.prototype.process = function(req, res, next){
 }
 
 Middleware.prototype.isValidRequest = function(req){
-	return this.INTENT_ID == (req.intent || {}).id;
+	return this.INTENT_NAME == (req.queryResult.intent || {}).name;
 }
 
 Middleware.prototype.convertAmount = function(data){
+	var from = this.httprequest.queryResult.parameters.from;
+	var to = this.httprequest.queryResult.parameters.to;
+	var amount = this.httprequest.queryResult.parameters.amount;
+
+	var apiResultParamName = [from,to].join("_").toUpperCase();
+	var convertedAmount = data[apiResultParamName] * amount;
+	convertedAmount = convertedAmount.toFixed(2);
+
 	let response = {
-		fulfillmentText: [data[0], this.httprequest.parameters.to].join(" ")
+		fulfillmentText: [convertedAmount, this.httprequest.queryResult.parameters.to].join(" ")
 	};
 
 	this.httpresponse.send(response);
