@@ -1,3 +1,5 @@
+global._projectpath = __dirname;
+
 const express = require("express"),
 	fs = require("fs"),
 	https = require("https")

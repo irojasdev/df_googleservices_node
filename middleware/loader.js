@@ -1,5 +1,5 @@
-const fs = require("fs")
-const CurrencyConverterMiddleware = require("./currencyConverter").CurrencyConverterMiddleware;
+const fs = require("fs"),
+	CurrencyConverterMiddleware = require("./currencyConverter").CurrencyConverterMiddleware;
 
 const keys = JSON.parse(fs.readFileSync(global._projectpath + "/middleware/keys.json"));
 
