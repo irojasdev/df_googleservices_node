@@ -1,11 +1,9 @@
-const fs = require("fs"),
-	CurrencyConverterMiddleware = require("./currencyConverter").CurrencyConverterMiddleware;
+const fs = require("fs");
 
 const keys = JSON.parse(fs.readFileSync(global._projectpath + "/middleware/keys.json"));
 
 exports.pool = [
-	new CurrencyConverterMiddleware({"apikey": keys.currencyConverterAPIKey}),
-	require("./calendar").middleware(),
+	require("./currencyConverter").middleware({apikey: keys.currencyConverterAPIKey}),
 	require("./translator").middleware(),
 ];
 
