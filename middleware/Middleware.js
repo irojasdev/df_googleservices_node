@@ -2,7 +2,7 @@ var Middleware = class{
 	constructor(){
 		this.httpresponse = null;
 		this.requestData = null;
-		this.INTENT_NAME = "TBD";
+		this.INTENT_NAME = ["TBD"];
 	}
 
 	process(req, res){
@@ -22,7 +22,8 @@ Middleware.prototype.validateAndProcess = function(req, res, next){
 }
 
 Middleware.prototype.isValidRequest = function(req){
-	return this.INTENT_NAME == (req.queryResult.intent || {}).name;
+	var reqIntentName = (req.queryResult.intent || {}).name;
+	return this.INTENT_NAME.find(intent => {return intent == reqIntentName});
 }
 
 exports.Middleware = Middleware;

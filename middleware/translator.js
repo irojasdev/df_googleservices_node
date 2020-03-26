@@ -4,7 +4,8 @@ var Middleware = require("./Middleware").Middleware,
 class TranslatorMiddleware extends Middleware{
 	constructor(data){
 		super();
-		this.INTENT_NAME = "projects/services-fcf2b/agent/intents/18003fc2-b05d-4fda-8de6-70d1cbaecb47";
+		this.INTENT_NAME = ["projects/services-fcf2b/agent/intents/18003fc2-b05d-4fda-8de6-70d1cbaecb47",
+							"projects/services-fcf2b/agent/intents/2969c989-9f85-4ee5-a2b2-bc59d70c80a2"];
 		this.projectId = data.projectId;
 	}
 

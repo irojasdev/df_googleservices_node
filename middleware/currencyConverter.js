@@ -3,7 +3,7 @@ var Middleware = require("./Middleware").Middleware;
 class CurrencyConverterMiddleware extends Middleware{
 	constructor(data){
 		super();
-		this.INTENT_NAME = "projects/services-fcf2b/agent/intents/bbfbdd03-3708-46bd-baef-44eb9214f4a0";
+		this.INTENT_NAME = ["projects/services-fcf2b/agent/intents/bbfbdd03-3708-46bd-baef-44eb9214f4a0"];
 		this.apikey = data.apikey;
 	}
 
