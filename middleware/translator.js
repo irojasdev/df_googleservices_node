@@ -5,6 +5,7 @@ class TranslatorMiddleware extends Middleware{
 	constructor(data){
 		super();
 		this.INTENT_NAME = "projects/services-fcf2b/agent/intents/18003fc2-b05d-4fda-8de6-70d1cbaecb47";
+		this.projectId = data.projectId;
 	}
 
 	process(req, res){
@@ -24,23 +25,25 @@ class TranslatorMiddleware extends Middleware{
 		}else{
 			translate(text, {to: targetLanguage})
 				.then(translation => {
+					
+					var CONTEXT_NAME = "translate";
+					var context = req.queryResult.outputContexts.find(context => {return context.name.includes(CONTEXT_NAME)});
+
+					context.parameters = {
+						"translatedText": translation.text,
+			            "target": targetLanguage
+					};
+
 					res.send({
 					followupEventInput: {
-						name: "translation-response",
+						name: "translation",
 						parameters: {
 							translatedText: translation.text,
 							detectedLanguage: translation.from.language.iso
 						}
 					},
 					outputContexts: [
-						 {
-					        "name": "translate",
-					        "lifespanCount": 5,
-					        "parameters": {
-					          "translatedText": translation.text,
-					          "target": targetLanguage
-				        	}
-				    	}
+						 context
 					]
 					});
 				})

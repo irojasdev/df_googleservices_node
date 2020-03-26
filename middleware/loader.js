@@ -4,7 +4,7 @@ const keys = JSON.parse(fs.readFileSync(global._projectpath + "/middleware/keys.
 
 exports.pool = [
 	require("./currencyConverter").middleware({apikey: keys.currencyConverterAPIKey}),
-	require("./translator").middleware(),
+	require("./translator").middleware({projectId: keys.projectId}),
 ];
 
 
